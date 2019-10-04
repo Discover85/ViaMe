@@ -1,0 +1,57 @@
+<form  #form="ngForm" (submit)="onsubmittask(title,description)" class="">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+      <input name="title" [(ngModel)]="title" required minlength="1" class="form-control" placeholder="Enter User Name">
+    </div></div>
+    <div class="col-md-6">
+
+    <div class="form-group">
+          <input name="description" [(ngModel)]="description" required minlength="1" class="form-control" placeholder="Enter User Name">
+        </div>
+      </div>
+      <div class="col-md-2">
+          <input type="submit" class="btn btn-primary" value="save">
+</div>
+</div>
+</form>
+<!-- ----   -->
+<div class="row">
+    <div class="input-group col-md-6">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-white">
+          <i class="fab fa-wpforms"></i>
+        </div>
+      </div>
+      <input name="title" (input)="searchbyTitle($event.target.value)" minlength="1" maxlength="10" class="form-control" placeholder="Search By Task">
+    </div>
+    
+  </div>
+  <div class="table-responsive">
+     <table class="table table-striped table-sm table-bordered table-hover"> 
+  
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list" >
+          <td><h5>{{item.title}}</h5></td>
+          <td>{{item.description}}</td>
+          <td>
+              <strong *ngIf="item.status==null" class="col-md-3 badge badge-secondary" style="width: 100%" >Created</strong>
+              <strong *ngIf="item.status==2" class="col-md-3 badge badge-danger" style="width: 100%" >working</strong>
+              <strong *ngIf="item.status==3" class="col-md-3 badge badge-warning" style="width: 100%" >finished</strong>
+              <strong *ngIf="item.status==4" class="col-md-3 badge badge-success" style="width: 100%" >canceled</strong>
+                      </td>
+            <td><a   class="btn btn-primary" (click)="GetMyNotifications(item.id)">Action</a></td>
+        </tr>
+      </tbody>
+    </table> 
+  </div>
+  <div>
+  </div>
